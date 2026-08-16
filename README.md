@@ -48,4 +48,4 @@ Contributions, bug reports, and feature ideas are welcome. Please open an issue 
 
 ## License
 
-Add a license file before publishing the repository so others know how they may use and contribute to BUDGY.
+This project is licensed under the MIT License. See [LICENSE](./LICENSE).
