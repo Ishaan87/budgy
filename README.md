@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BUDGY
 
-## Getting Started
+An open-source personal expense manager for tracking expenses, income, transfers, budgets, accounts, cards, and debts. BUDGY supports natural-language entry, such as “₹450 lunch at Cafe today”, so logging a transaction stays quick.
 
-First, run the development server:
+## Features
+
+- Track expenses, income, and transfers across multiple accounts.
+- Organize spending with categories, budgets, recurring transactions, and rules.
+- Monitor credit-card cycles, balances, debts, and monthly spending insights.
+- Add transactions with a fast local parser and optional LLM-assisted natural-language entry.
+- Sign in securely with Supabase magic links and keep each user's data isolated with Row Level Security.
+- Install the app as a PWA and queue quick-add entries while offline.
+- Run scheduled jobs for recurring transactions and budget/card reminders when deployed on Vercel.
+
+## Built with
+
+Next.js, React, TypeScript, Tailwind CSS, Drizzle ORM, PostgreSQL/Supabase, and Vercel Cron.
+
+## Use BUDGY yourself
+
+To run your own copy, follow the complete [setup guide](./SETUP.md). It covers creating a Supabase project, environment variables, database migrations, local development, deployment, cron jobs, and PWA installation.
+
+The short version:
 
 ```bash
+git clone <your-fork-or-repository-url>
+cd BUDGY-final
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+You will need to configure `.env.local` and run the Supabase migrations before the app can be used. See [SETUP.md](./SETUP.md) for the required values and exact steps.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Development
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev        # start the local development server
+npm run build      # create a production build
+npm run lint       # run ESLint
+npm test           # run unit tests
+npm run test:e2e   # run Playwright end-to-end tests
+```
 
-## Learn More
+## Contributing
 
-To learn more about Next.js, take a look at the following resources:
+Contributions, bug reports, and feature ideas are welcome. Please open an issue to discuss substantial changes before submitting a pull request.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Add a license file before publishing the repository so others know how they may use and contribute to BUDGY.
