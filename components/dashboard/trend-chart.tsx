@@ -13,7 +13,7 @@ export function TrendChart({ data }: { data: { date: string; amount: number }[] 
       <CardHeader>
         <CardTitle className="text-base">Daily spend this month</CardTitle>
       </CardHeader>
-      <CardContent className="h-64">
+      <CardContent className="h-[220px] w-full sm:h-[280px] lg:h-[340px]">
         {chartData.length === 0 ? (
           <p className="flex h-full items-center justify-center text-sm text-muted-foreground">
             No expenses recorded yet this month.
@@ -24,15 +24,15 @@ export function TrendChart({ data }: { data: { date: string; amount: number }[] 
               <CartesianGrid vertical={false} stroke={CHART_INK.gridline} />
               <XAxis
                 dataKey="day"
-                tick={{ fill: CHART_INK.muted, fontSize: 12 }}
+                tick={{ fill: CHART_INK.muted, fontSize: 11 }}
                 axisLine={{ stroke: CHART_INK.baseline }}
                 tickLine={false}
               />
               <YAxis
-                tick={{ fill: CHART_INK.muted, fontSize: 12 }}
+                tick={{ fill: CHART_INK.muted, fontSize: 11 }}
                 axisLine={false}
                 tickLine={false}
-                width={48}
+                width={40}
                 tickFormatter={(v) => formatINR(v)}
               />
               <Tooltip

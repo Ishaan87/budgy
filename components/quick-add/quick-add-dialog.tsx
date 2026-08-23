@@ -193,7 +193,7 @@ export function QuickAddDialog({
           ⌘K
         </kbd>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-lg" showCloseButton>
+      <DialogContent className="max-h-[85vh] w-full max-w-sm overflow-y-auto sm:max-w-lg" showCloseButton>
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Sparkles className="size-4" /> Quick add
@@ -223,7 +223,7 @@ export function QuickAddDialog({
               </div>
             )}
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <div className="space-y-1">
                 <Label className="flex items-center gap-1.5 text-xs">
                   Amount (₹) <FieldSourceBadge source={draft.sources.amount} />

@@ -53,8 +53,8 @@ export function TransactionTable({
             <TableHead className="w-8"></TableHead>
             <TableHead>Date</TableHead>
             <TableHead>Merchant / Note</TableHead>
-            <TableHead>Account</TableHead>
-            <TableHead>Category</TableHead>
+            <TableHead className="hidden sm:table-cell">Account</TableHead>
+            <TableHead className="hidden sm:table-cell">Category</TableHead>
             <TableHead className="text-right">Amount</TableHead>
             <TableHead className="w-20"></TableHead>
           </TableRow>
@@ -81,7 +81,7 @@ export function TransactionTable({
                   </div>
                 )}
               </TableCell>
-              <TableCell className="text-sm">
+              <TableCell className="hidden text-sm sm:table-cell">
                 {r.accountName}
                 {r.type === "transfer" && r.toAccountId && (
                   <span className="text-muted-foreground">
@@ -90,7 +90,7 @@ export function TransactionTable({
                   </span>
                 )}
               </TableCell>
-              <TableCell className="text-sm text-muted-foreground">
+              <TableCell className="hidden text-sm text-muted-foreground sm:table-cell">
                 {r.categoryName ?? (r.type === "transfer" ? "Transfer" : "—")}
               </TableCell>
               <TableCell

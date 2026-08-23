@@ -34,20 +34,20 @@ export function TransactionFilters({
   );
 
   return (
-    <div className="flex flex-wrap items-center gap-2">
+    <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
       <Input
         placeholder="Search merchant or note…"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         onKeyDown={(e) => e.key === "Enter" && setParam("search", search || null)}
         onBlur={() => setParam("search", search || null)}
-        className="max-w-56"
+        className="w-full sm:max-w-56"
       />
       <Select
         value={searchParams.get("type") ?? "all"}
         onValueChange={(v) => setParam("type", v === "all" ? null : v)}
       >
-        <SelectTrigger className="w-32">
+        <SelectTrigger className="w-full sm:w-32">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
@@ -61,7 +61,7 @@ export function TransactionFilters({
         value={searchParams.get("accountId") ?? "all"}
         onValueChange={(v) => setParam("accountId", v === "all" ? null : v)}
       >
-        <SelectTrigger className="w-40">
+        <SelectTrigger className="w-full sm:w-40">
           <SelectValue placeholder="Account" />
         </SelectTrigger>
         <SelectContent>
@@ -77,7 +77,7 @@ export function TransactionFilters({
         value={searchParams.get("categoryId") ?? "all"}
         onValueChange={(v) => setParam("categoryId", v === "all" ? null : v)}
       >
-        <SelectTrigger className="w-40">
+        <SelectTrigger className="w-full sm:w-40">
           <SelectValue placeholder="Category" />
         </SelectTrigger>
         <SelectContent>
@@ -89,7 +89,12 @@ export function TransactionFilters({
           ))}
         </SelectContent>
       </Select>
-      <Button variant="outline" size="sm" render={<a href={`/api/transactions/export?${searchParams.toString()}`} />}>
+      <Button
+        variant="outline"
+        size="sm"
+        className="w-full sm:w-auto"
+        render={<a href={`/api/transactions/export?${searchParams.toString()}`} />}
+      >
         <Download className="size-3.5" /> Export
       </Button>
     </div>

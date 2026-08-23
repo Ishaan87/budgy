@@ -66,7 +66,7 @@ export function AddChainEntryDialog({ credentials }: { credentials: Credential[]
       <DialogTrigger render={<Button variant="outline" />}>
         <Plus className="size-4" /> Add model to chain
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="max-h-[85vh] w-full max-w-sm overflow-y-auto sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Add a model to the fallback chain</DialogTitle>
         </DialogHeader>

@@ -30,14 +30,14 @@ export function SummaryTiles({
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
       {tiles.map((tile) => (
         <Card key={tile.label}>
           <CardContent className="space-y-1 pt-4">
-            <CardDescription>{tile.label}</CardDescription>
+            <CardDescription className="truncate">{tile.label}</CardDescription>
             <CardTitle
               className={cn(
-                "text-xl tabular-nums",
+                "text-lg tabular-nums sm:text-xl",
                 tile.tone === "good" && "text-emerald-600",
                 tile.tone === "bad" && "text-destructive",
               )}

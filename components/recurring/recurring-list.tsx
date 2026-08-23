@@ -53,8 +53,11 @@ export function RecurringList({
   return (
     <div className="space-y-2">
       {rows.map((rule) => (
-        <div key={rule.id} className="flex items-center justify-between gap-3 rounded-lg border p-3">
-          <div>
+        <div
+          key={rule.id}
+          className="flex flex-col gap-3 rounded-lg border p-3 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <div className="min-w-0">
             <p className="font-medium">{rule.name}</p>
             <p className="text-xs text-muted-foreground">
               {formatINR(Number(rule.amount), { showDecimals: true })} · {rule.accountName}
@@ -64,7 +67,7 @@ export function RecurringList({
               {formatDateDMY(rule.nextRunOn)}
             </p>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             {!rule.autoPost && (
               <Badge variant="outline" className="text-[0.65rem]">
                 manual

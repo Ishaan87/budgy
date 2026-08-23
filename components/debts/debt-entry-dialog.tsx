@@ -77,7 +77,7 @@ export function DebtEntryDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger render={<span />}>{trigger}</DialogTrigger>
-      <DialogContent className="sm:max-w-sm">
+      <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-sm">
         <DialogHeader>
           <DialogTitle>Record activity</DialogTitle>
         </DialogHeader>

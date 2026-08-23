@@ -54,9 +54,12 @@ export function ChainList({ rows }: { rows: ChainRow[] }) {
   return (
     <div className="space-y-2">
       {rows.map((row, index) => (
-        <div key={row.chainId} className="flex items-center justify-between gap-3 rounded-lg border p-3">
-          <div className="flex items-center gap-3">
-            <div className="flex flex-col">
+        <div
+          key={row.chainId}
+          className="flex flex-col gap-3 rounded-lg border p-3 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="flex flex-col shrink-0">
               <Button
                 variant="ghost"
                 size="icon-xs"
@@ -74,9 +77,9 @@ export function ChainList({ rows }: { rows: ChainRow[] }) {
                 <ArrowDown className="size-3" />
               </Button>
             </div>
-            <div>
-              <p className="font-medium">{row.model}</p>
-              <p className="text-xs text-muted-foreground">
+            <div className="min-w-0">
+              <p className="font-medium break-words">{row.model}</p>
+              <p className="text-xs text-muted-foreground break-words">
                 {PROVIDER_LABELS[row.provider]} · {row.credentialLabel} (···{row.keyLast4})
               </p>
               {row.status === "cooldown" && row.cooldownUntil && (
@@ -90,7 +93,7 @@ export function ChainList({ rows }: { rows: ChainRow[] }) {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3 sm:flex-nowrap">
             <div className="hidden text-right text-xs text-muted-foreground sm:block">
               <p>
                 {row.callCount ?? 0} calls · {row.errorCount ?? 0} errors

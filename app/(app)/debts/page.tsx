@@ -15,7 +15,7 @@ export default async function DebtsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Debts</h1>
           <p className="text-muted-foreground">Who owes you, and what you owe.</p>
@@ -23,7 +23,7 @@ export default async function DebtsPage() {
         <DebtFormDialog />
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <div className="space-y-3">
           <h2 className="text-sm font-medium text-muted-foreground">Owed to me</h2>
           {owedToMe.length === 0 && <p className="text-sm text-muted-foreground">Nobody owes you right now.</p>}
@@ -43,7 +43,7 @@ export default async function DebtsPage() {
       {settled.length > 0 && (
         <div className="space-y-3">
           <h2 className="text-sm font-medium text-muted-foreground">Settled</h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 lg:gap-6">
             {settled.map((d) => (
               <DebtCard key={d.id} debt={d} accounts={accountOptions} />
             ))}

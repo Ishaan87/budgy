@@ -18,7 +18,7 @@ export default async function AccountsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="text-2xl font-semibold tracking-tight">Accounts &amp; Categories</h1>
       </div>
 
@@ -32,18 +32,18 @@ export default async function AccountsPage() {
           <div className="flex justify-end">
             <AccountFormDialog />
           </div>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 lg:gap-6">
             {accounts.map((a) => (
               <Card key={a.id} className={a.isArchived ? "opacity-60" : undefined}>
                 <CardContent className="space-y-2 pt-4">
-                  <div className="flex items-start justify-between">
+                  <div className="flex flex-wrap items-start justify-between gap-2">
                     <div>
                       <p className="font-medium">{a.name}</p>
                       <Badge variant="outline" className="mt-1 capitalize">
                         {a.type.replace("_", " ")}
                       </Badge>
                     </div>
-                    <div className="flex gap-1">
+                    <div className="flex shrink-0 gap-1">
                       <AccountFormDialog account={a} />
                       <AccountArchiveButton id={a.id} isArchived={a.isArchived} />
                     </div>
@@ -67,10 +67,10 @@ export default async function AccountsPage() {
           <div className="flex justify-end">
             <CategoryFormDialog parentOptions={categories} />
           </div>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 lg:gap-6">
             {categories.map((c) => (
               <Card key={c.id} className={c.isArchived ? "opacity-60" : undefined}>
-                <CardContent className="flex items-center justify-between pt-4">
+                <CardContent className="flex flex-wrap items-center justify-between gap-2 pt-4">
                   <div>
                     <p className="font-medium">{c.name}</p>
                     <Badge variant="outline" className="mt-1 capitalize">
@@ -82,7 +82,7 @@ export default async function AccountsPage() {
                       </p>
                     )}
                   </div>
-                  <div className="flex gap-1">
+                  <div className="flex shrink-0 gap-1">
                     <CategoryFormDialog category={c} parentOptions={categories} />
                     <CategoryArchiveButton id={c.id} isArchived={c.isArchived} />
                   </div>

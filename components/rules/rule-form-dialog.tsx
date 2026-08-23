@@ -97,57 +97,61 @@ export function RuleFormDialog({ categories, rule }: { categories: Category[]; r
           </>
         )}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-lg">
+      <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>{isEdit ? "Edit rule" : "New auto-categorization rule"}</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 px-1">
           <div className="space-y-2">
             <Label>When</Label>
             {fields.map((field, index) => (
-              <div key={field.id} className="flex items-center gap-2">
-                <Controller
-                  control={control}
-                  name={`match.${index}.field`}
-                  render={({ field: f }) => (
-                    <Select value={f.value} onValueChange={f.onChange}>
-                      <SelectTrigger className="w-32">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {Object.entries(FIELD_LABELS).map(([v, label]) => (
-                          <SelectItem key={v} value={v}>
-                            {label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+              <div key={field.id} className="flex flex-col gap-2 sm:flex-row sm:items-center">
+                <div className="flex gap-2">
+                  <Controller
+                    control={control}
+                    name={`match.${index}.field`}
+                    render={({ field: f }) => (
+                      <Select value={f.value} onValueChange={f.onChange}>
+                        <SelectTrigger className="w-full sm:w-32">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {Object.entries(FIELD_LABELS).map(([v, label]) => (
+                            <SelectItem key={v} value={v}>
+                              {label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                  <Controller
+                    control={control}
+                    name={`match.${index}.op`}
+                    render={({ field: f }) => (
+                      <Select value={f.value} onValueChange={f.onChange}>
+                        <SelectTrigger className="w-full sm:w-32">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {Object.entries(OP_LABELS).map(([v, label]) => (
+                            <SelectItem key={v} value={v}>
+                              {label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                </div>
+                <div className="flex items-center gap-2">
+                  <Input placeholder="value" className="min-w-0 flex-1" {...register(`match.${index}.value` as const)} />
+                  {fields.length > 1 && (
+                    <Button type="button" variant="ghost" size="icon-sm" onClick={() => remove(index)}>
+                      <Trash2 className="size-4" />
+                    </Button>
                   )}
-                />
-                <Controller
-                  control={control}
-                  name={`match.${index}.op`}
-                  render={({ field: f }) => (
-                    <Select value={f.value} onValueChange={f.onChange}>
-                      <SelectTrigger className="w-32">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {Object.entries(OP_LABELS).map(([v, label]) => (
-                          <SelectItem key={v} value={v}>
-                            {label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  )}
-                />
-                <Input placeholder="value" {...register(`match.${index}.value` as const)} />
-                {fields.length > 1 && (
-                  <Button type="button" variant="ghost" size="icon-sm" onClick={() => remove(index)}>
-                    <Trash2 className="size-4" />
-                  </Button>
-                )}
+                </div>
               </div>
             ))}
             <Button

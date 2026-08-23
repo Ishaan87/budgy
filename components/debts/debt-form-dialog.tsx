@@ -55,7 +55,7 @@ export function DebtFormDialog() {
       <DialogTrigger render={<Button />}>
         <Plus className="size-4" /> New IOU
       </DialogTrigger>
-      <DialogContent className="sm:max-w-sm">
+      <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-sm">
         <DialogHeader>
           <DialogTitle>New IOU</DialogTitle>
         </DialogHeader>

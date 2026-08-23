@@ -14,7 +14,7 @@ export default async function SettingsPage() {
   const [credentials, chain] = await Promise.all([listCredentials(userId), listChainWithState(userId)]);
 
   return (
-    <div className="max-w-3xl space-y-8">
+    <div className="max-w-3xl space-y-6 px-4 sm:space-y-8 sm:px-0">
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Settings</h1>
         <p className="text-muted-foreground">
@@ -23,7 +23,7 @@ export default async function SettingsPage() {
       </div>
 
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0">
+        <CardHeader className="flex flex-col items-start gap-3 space-y-0 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <CardTitle>API keys</CardTitle>
             <CardDescription>Encrypted at rest. Only the last 4 characters are shown.</CardDescription>
@@ -35,14 +35,17 @@ export default async function SettingsPage() {
             <p className="text-sm text-muted-foreground">No API keys added yet.</p>
           )}
           {credentials.map((c) => (
-            <div key={c.id} className="flex items-center justify-between rounded-lg border p-3">
-              <div>
-                <p className="font-medium">{c.label}</p>
-                <p className="text-xs text-muted-foreground">
+            <div
+              key={c.id}
+              className="flex flex-col gap-2 rounded-lg border p-3 sm:flex-row sm:items-center sm:justify-between"
+            >
+              <div className="min-w-0">
+                <p className="font-medium break-words">{c.label}</p>
+                <p className="text-xs text-muted-foreground break-words">
                   {PROVIDER_LABELS[c.provider]} · ···{c.keyLast4}
                 </p>
               </div>
-              <form action={removeCredential.bind(null, c.id)}>
+              <form action={removeCredential.bind(null, c.id)} className="self-end sm:self-auto">
                 <Button variant="ghost" size="icon-sm" type="submit">
                   <Trash2 className="size-3.5" />
                 </Button>
@@ -53,7 +56,7 @@ export default async function SettingsPage() {
       </Card>
 
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0">
+        <CardHeader className="flex flex-col items-start gap-3 space-y-0 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <CardTitle>Fallback chain</CardTitle>
             <CardDescription>
@@ -63,7 +66,7 @@ export default async function SettingsPage() {
           </div>
           <AddChainEntryDialog credentials={credentials} />
         </CardHeader>
-        <CardContent>
+        <CardContent className="overflow-x-auto">
           <ChainList rows={chain} />
         </CardContent>
       </Card>

@@ -37,8 +37,11 @@ export function RuleList({ rows, categories }: { rows: RuleRow[]; categories: { 
   return (
     <div className="space-y-2">
       {rows.map((rule, index) => (
-        <div key={rule.id} className="flex items-center justify-between gap-3 rounded-lg border p-3">
-          <div className="flex items-center gap-3">
+        <div
+          key={rule.id}
+          className="flex flex-col gap-3 rounded-lg border p-3 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <div className="flex items-start gap-3 sm:items-center">
             <div className="flex flex-col">
               <Button
                 variant="ghost"
@@ -57,7 +60,7 @@ export function RuleList({ rows, categories }: { rows: RuleRow[]; categories: { 
                 <ArrowDown className="size-3" />
               </Button>
             </div>
-            <div>
+            <div className="min-w-0">
               <p className="text-sm">
                 {rule.match.map((c, i) => (
                   <span key={i}>
@@ -75,7 +78,7 @@ export function RuleList({ rows, categories }: { rows: RuleRow[]; categories: { 
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             {rule.createdFrom === "learned" && (
               <Badge variant="outline" className="text-[0.65rem]">
                 learned

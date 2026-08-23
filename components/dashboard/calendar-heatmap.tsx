@@ -29,9 +29,9 @@ export function CalendarHeatmap({
         <CardTitle className="text-base">This month at a glance</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-7 gap-1.5">
+        <div className="grid grid-cols-7 gap-1 sm:gap-1.5">
           {["S", "M", "T", "W", "T", "F", "S"].map((d, i) => (
-            <div key={i} className="text-center text-[0.65rem] text-muted-foreground">
+            <div key={i} className="text-center text-[0.6rem] text-muted-foreground sm:text-[0.65rem]">
               {d}
             </div>
           ))}
@@ -42,7 +42,7 @@ export function CalendarHeatmap({
               <div
                 key={i}
                 title={cell.day ? `${cell.day}: ${formatINR(cell.amount, { showDecimals: true })}` : undefined}
-                className="flex aspect-square items-center justify-center rounded text-[0.65rem]"
+                className="flex aspect-square items-center justify-center rounded text-[0.6rem] sm:text-[0.65rem]"
                 style={{
                   background: cell.amount > 0 ? sequentialColor(cell.amount / maxAmount) : "var(--muted)",
                   color: cell.amount / maxAmount > 0.6 ? "#fff" : undefined,

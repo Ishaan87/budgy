@@ -20,39 +20,41 @@ export function CategoryDonut({ data }: { data: { categoryName: string; amount: 
       <CardHeader>
         <CardTitle className="text-base">Spend by category</CardTitle>
       </CardHeader>
-      <CardContent className="h-64">
+      <CardContent className="h-auto min-h-[220px] w-full sm:h-64 lg:h-[280px]">
         {chartData.length === 0 ? (
           <p className="flex h-full items-center justify-center text-sm text-muted-foreground">
             No categorized expenses yet this month.
           </p>
         ) : (
-          <div className="flex h-full items-center gap-4">
-            <ResponsiveContainer width="55%" height="100%">
-              <PieChart>
-                <Pie
-                  data={chartData}
-                  dataKey="amount"
-                  nameKey="categoryName"
-                  innerRadius="55%"
-                  outerRadius="90%"
-                  paddingAngle={2}
-                  strokeWidth={2}
-                  stroke="var(--card)"
-                >
-                  {chartData.map((entry, index) => (
-                    <Cell
-                      key={entry.categoryName}
-                      fill={entry.categoryName === "Other" ? "#c3c2b7" : categoricalColor(index)}
-                    />
-                  ))}
-                </Pie>
-                <Tooltip
-                  formatter={(value, name) => [formatINR(Number(value), { showDecimals: true }), name]}
-                  contentStyle={{ fontSize: 12, borderRadius: 8 }}
-                />
-              </PieChart>
-            </ResponsiveContainer>
-            <ul className="flex-1 space-y-1.5 text-xs">
+          <div className="flex h-full flex-col items-center gap-4 sm:flex-row">
+            <div className="h-[160px] w-full shrink-0 sm:h-full sm:w-[55%]">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={chartData}
+                    dataKey="amount"
+                    nameKey="categoryName"
+                    innerRadius="55%"
+                    outerRadius="90%"
+                    paddingAngle={2}
+                    strokeWidth={2}
+                    stroke="var(--card)"
+                  >
+                    {chartData.map((entry, index) => (
+                      <Cell
+                        key={entry.categoryName}
+                        fill={entry.categoryName === "Other" ? "#c3c2b7" : categoricalColor(index)}
+                      />
+                    ))}
+                  </Pie>
+                  <Tooltip
+                    formatter={(value, name) => [formatINR(Number(value), { showDecimals: true }), name]}
+                    contentStyle={{ fontSize: 12, borderRadius: 8 }}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+            <ul className="w-full flex-1 space-y-1.5 text-xs">
               {chartData.map((entry, index) => (
                 <li key={entry.categoryName} className="flex items-center justify-between gap-2">
                   <span className="flex items-center gap-1.5 truncate">

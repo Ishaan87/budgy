@@ -28,7 +28,7 @@ export default function ForgotPasswordPage() {
       <div className="absolute top-4 right-4">
         <ThemeToggle />
       </div>
-      <Card className="w-full max-w-sm">
+      <Card className="w-full max-w-sm sm:max-w-md">
         <CardHeader>
           <CardTitle className="text-2xl">Reset password</CardTitle>
           <CardDescription>We&apos;ll email you a link to set a new password.</CardDescription>

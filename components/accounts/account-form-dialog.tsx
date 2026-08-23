@@ -101,7 +101,7 @@ export function AccountFormDialog({ account }: { account?: AccountWithBalance })
           </>
         )}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{isEdit ? "Edit account" : "New account"}</DialogTitle>
         </DialogHeader>
@@ -148,7 +148,7 @@ export function AccountFormDialog({ account }: { account?: AccountWithBalance })
           </div>
 
           {type === "credit_card" && (
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
               <div className="space-y-2">
                 <Label htmlFor="creditLimit">Limit (₹)</Label>
                 <Input id="creditLimit" type="number" step="0.01" {...register("creditLimit")} />

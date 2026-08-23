@@ -66,7 +66,7 @@ export function AddCredentialDialog() {
       <DialogTrigger render={<Button />}>
         <Plus className="size-4" /> Add API key
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="max-h-[85vh] w-full max-w-sm overflow-y-auto sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Add an LLM API key</DialogTitle>
           <DialogDescription>

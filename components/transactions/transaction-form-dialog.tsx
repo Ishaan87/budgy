@@ -127,11 +127,11 @@ export function TransactionFormDialog({
           </>
         )}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-lg">
+      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>{isEdit ? "Edit transaction" : "New transaction"}</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 max-h-[70vh] overflow-y-auto px-1">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 px-1">
           <div className="space-y-2">
             <Label>Type</Label>
             <Controller
@@ -155,7 +155,7 @@ export function TransactionFormDialog({
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="amount">Amount (₹)</Label>
               <Input id="amount" type="number" step="0.01" {...register("amount")} />
@@ -327,7 +327,7 @@ export function TransactionFormDialog({
             </>
           )}
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="merchant">Merchant (optional)</Label>
               <Input id="merchant" placeholder="e.g. Zomato" {...register("merchant")} />

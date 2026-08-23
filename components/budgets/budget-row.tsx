@@ -30,9 +30,9 @@ export function BudgetRow({ row, month }: { row: BudgetRowType; month: Date }) {
 
   return (
     <div className="space-y-2 rounded-lg border p-3">
-      <div className="flex flex-wrap items-center justify-between gap-2">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <span className="font-medium">{row.categoryName}</span>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <label className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <Switch
               checked={rollover}
@@ -47,7 +47,7 @@ export function BudgetRow({ row, month }: { row: BudgetRowType; month: Date }) {
             <span className="text-sm text-muted-foreground">₹</span>
             <Input
               type="number"
-              className="w-24"
+              className="w-24 sm:w-24"
               value={amount || ""}
               onChange={(e) => setAmount(Number(e.target.value) || 0)}
               onBlur={() => save(amount, rollover)}
@@ -60,9 +60,9 @@ export function BudgetRow({ row, month }: { row: BudgetRowType; month: Date }) {
         <>
           <Progress
             value={pct}
-            className={overBudget ? "[&_[data-slot=progress-indicator]]:bg-destructive" : undefined}
+            className={overBudget ? "w-full [&_[data-slot=progress-indicator]]:bg-destructive" : "w-full"}
           />
-          <div className="flex justify-between text-xs text-muted-foreground">
+          <div className="flex flex-col gap-1 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
             <span>
               {formatINR(row.spent, { showDecimals: true })} of {formatINR(effectiveBudget, { showDecimals: true })}
               {row.rolloverFromPrevious > 0 && ` (incl. ${formatINR(row.rolloverFromPrevious)} rolled over)`}

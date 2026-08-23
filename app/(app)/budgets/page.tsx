@@ -21,8 +21,8 @@ export default async function BudgetsPage({
   const rows = await listBudgetsForMonth(userId, month);
 
   return (
-    <div className="max-w-2xl space-y-4">
-      <div className="flex items-center justify-between">
+    <div className="max-w-2xl space-y-4 px-4 sm:px-6">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Budgets</h1>
           <p className="text-muted-foreground">Set a monthly limit per category. Leave at ₹0 to skip one.</p>

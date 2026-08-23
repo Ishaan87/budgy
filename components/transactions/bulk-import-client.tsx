@@ -132,11 +132,11 @@ export function BulkImportClient({
             <TableRow>
               <TableHead className="w-8"></TableHead>
               <TableHead>Line</TableHead>
-              <TableHead>Type</TableHead>
+              <TableHead className="hidden sm:table-cell">Type</TableHead>
               <TableHead>Amount</TableHead>
-              <TableHead>Account</TableHead>
-              <TableHead>Category</TableHead>
-              <TableHead>Date</TableHead>
+              <TableHead className="hidden sm:table-cell">Account</TableHead>
+              <TableHead className="hidden sm:table-cell">Category</TableHead>
+              <TableHead className="hidden md:table-cell">Date</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -158,7 +158,7 @@ export function BulkImportClient({
                     </span>
                   )}
                 </TableCell>
-                <TableCell>
+                <TableCell className="hidden sm:table-cell">
                   <Select value={row.draft.type} onValueChange={(v) => updateRow(index, { type: v as NlDraft["type"] })}>
                     <SelectTrigger size="sm">
                       <SelectValue />
@@ -178,7 +178,7 @@ export function BulkImportClient({
                     onChange={(e) => updateRow(index, { amount: Number(e.target.value) || null })}
                   />
                 </TableCell>
-                <TableCell>
+                <TableCell className="hidden sm:table-cell">
                   <Select
                     value={row.draft.accountId ?? undefined}
                     onValueChange={(v) => updateRow(index, { accountId: v })}
@@ -195,7 +195,7 @@ export function BulkImportClient({
                     </SelectContent>
                   </Select>
                 </TableCell>
-                <TableCell>
+                <TableCell className="hidden sm:table-cell">
                   {row.draft.type === "transfer" ? (
                     <Select
                       value={row.draft.toAccountId ?? undefined}
@@ -230,14 +230,16 @@ export function BulkImportClient({
                     </Select>
                   )}
                 </TableCell>
-                <TableCell className="text-sm text-muted-foreground">{formatDateDMY(row.draft.occurredAt)}</TableCell>
+                <TableCell className="hidden text-sm text-muted-foreground md:table-cell">
+                  {formatDateDMY(row.draft.occurredAt)}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </div>
 
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-muted-foreground">
           {rows.filter((r) => r.include).length} of {rows.length} selected ·{" "}
           {formatINR(
@@ -246,7 +248,7 @@ export function BulkImportClient({
           )}{" "}
           total
         </p>
-        <div className="flex gap-2">
+        <div className="flex flex-col gap-2 sm:flex-row">
           <Button variant="outline" onClick={() => setRows(null)}>
             Start over
           </Button>

@@ -25,12 +25,12 @@ export function DebtCard({ debt, accounts }: { debt: DebtWithBalance; accounts: 
   return (
     <Card className={debt.isSettled ? "opacity-60" : undefined}>
       <CardContent className="space-y-2 pt-4">
-        <div className="flex items-start justify-between">
+        <div className="flex flex-wrap items-start justify-between gap-2">
           <div>
             <p className="font-medium">{debt.counterparty}</p>
             <p className="text-lg font-semibold tabular-nums">{formatINR(debt.balance, { showDecimals: true })}</p>
           </div>
-          <div className="flex gap-1">
+          <div className="flex shrink-0 gap-1">
             {!debt.isSettled && (
               <DebtEntryDialog
                 debtId={debt.id}
@@ -67,9 +67,9 @@ export function DebtCard({ debt, accounts }: { debt: DebtWithBalance; accounts: 
         {debt.entries.length > 0 && (
           <div className="space-y-1 border-t pt-2 text-xs text-muted-foreground">
             {debt.entries.slice(0, 3).map((e) => (
-              <div key={e.id} className="flex justify-between">
+              <div key={e.id} className="flex flex-wrap justify-between gap-x-2">
                 <span className="capitalize">{e.type}</span>
-                <span>
+                <span className="whitespace-nowrap">
                   {formatINR(e.amount)} · {formatDateDMY(e.occurredAt)}
                 </span>
               </div>

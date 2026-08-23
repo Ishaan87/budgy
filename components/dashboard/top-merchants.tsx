@@ -15,9 +15,9 @@ export function TopMerchants({ data }: { data: { merchant: string; amount: numbe
         ) : (
           data.map((m) => (
             <div key={m.merchant} className="space-y-1">
-              <div className="flex items-center justify-between text-sm">
-                <span className="font-medium">{m.merchant}</span>
-                <span className="tabular-nums text-muted-foreground">
+              <div className="flex items-center justify-between gap-2 text-sm">
+                <span className="min-w-0 truncate font-medium">{m.merchant}</span>
+                <span className="shrink-0 whitespace-nowrap tabular-nums text-muted-foreground">
                   {formatINR(m.amount, { showDecimals: true })} · {m.count}x
                 </span>
               </div>

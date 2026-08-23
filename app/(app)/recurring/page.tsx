@@ -17,8 +17,8 @@ export default async function RecurringPage() {
   const categoryOptions = categories.map((c) => ({ id: c.id, name: c.name, kind: c.kind }));
 
   return (
-    <div className="max-w-3xl space-y-4">
-      <div className="flex items-center justify-between">
+    <div className="max-w-3xl space-y-4 px-4 sm:px-6">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Recurring transactions</h1>
           <p className="text-muted-foreground">Rent, subscriptions, salary — posted automatically on schedule.</p>

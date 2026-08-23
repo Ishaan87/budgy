@@ -28,9 +28,9 @@ export default async function DashboardPage() {
   const { projected } = projectMonthEnd(summary.totalExpense, now);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Dashboard</h1>
+        <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">Dashboard</h1>
         <p className="text-muted-foreground">
           {now.toLocaleDateString("en-IN", { month: "long", year: "numeric" })}
         </p>
@@ -46,12 +46,12 @@ export default async function DashboardPage() {
         totalIOwe={debtSummary.totalIOwe}
       />
 
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
         <TrendChart data={trend} />
         <CategoryDonut data={categories} />
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
         <CalendarHeatmap data={trend} reference={now} />
         <TopMerchants data={merchants} />
       </div>
