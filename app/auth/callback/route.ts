@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 
-// Handles both the magic-link PKCE code exchange and the older token_hash flow, matching
-// whatever Supabase Auth sends in the confirmation URL.
+// Handles the PKCE code exchange and the older token_hash flow for signup confirmation and
+// password recovery links, matching whatever Supabase Auth sends in the confirmation URL.
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");

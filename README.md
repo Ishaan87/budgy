@@ -8,7 +8,7 @@ An open-source personal expense manager for tracking expenses, income, transfers
 - Organize spending with categories, budgets, recurring transactions, and rules.
 - Monitor credit-card cycles, balances, debts, and monthly spending insights.
 - Add transactions with a fast local parser and optional LLM-assisted natural-language entry.
-- Sign in securely with Supabase magic links and keep each user's data isolated with Row Level Security.
+- Sign in securely with Supabase email/password auth and keep each user's data isolated with Row Level Security.
 - Install the app as a PWA and queue quick-add entries while offline.
 - Run scheduled jobs for recurring transactions and budget/card reminders when deployed on Vercel.
 

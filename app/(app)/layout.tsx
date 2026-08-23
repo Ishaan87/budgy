@@ -4,6 +4,7 @@ import { MobileNav } from "@/components/mobile-nav";
 import { SignOutButton } from "@/components/sign-out-button";
 import { QuickAddDialog } from "@/components/quick-add/quick-add-dialog";
 import { OfflineSync } from "@/components/offline-sync";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { listAccountsWithBalances } from "@/lib/db/queries/accounts";
 import { listCategories } from "@/lib/db/queries/categories";
 import { requireUserId } from "@/lib/supabase/server";
@@ -43,6 +44,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
           <div className="flex items-center gap-2">
             <OfflineSync />
             <QuickAddDialog accounts={accountOptions} categories={categoryOptions} />
+            <ThemeToggle />
             <SignOutButton />
           </div>
         </header>

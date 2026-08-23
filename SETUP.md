@@ -30,7 +30,7 @@ npm install
 
 ## 4. Run the database migration
 
-In the Supabase dashboard, open **SQL Editor → New query**, and run these two files from
+In the Supabase dashboard, open **SQL Editor → New query**, and run these three files from
 `lib/db/migrations/` **in order**, each as its own run:
 
 
@@ -39,6 +39,10 @@ In the Supabase dashboard, open **SQL Editor → New query**, and run these two 
    Security with per-user policies on every table, creates the balance/spend/card-cycle/
    analytics views, and sets up the trigger that provisions a profile, starter categories,
    and a default Cash account for every new signup.
+3. `0002_security_hardening.sql` — closes Supabase's security-linter findings: forces the views
+   to run with the querying user's RLS (`security_invoker`) instead of the view owner's, pins
+   `search_path` on the trigger functions, and revokes public/anon/authenticated `EXECUTE` on
+   the signup trigger function so it can't be called directly as an RPC.
 
 These are plain SQL, safe to read before running. They're split from each other because
 `drizzle-kit` (which generated file 1 from `lib/db/schema.ts`) doesn't manage the `auth`
@@ -49,9 +53,10 @@ incremental migration file, then paste just that new file into the SQL editor.
 
 ## 5. Enable email auth
 
-In the Supabase dashboard: **Authentication → Providers**, confirm **Email** is enabled with
-**Confirm email** left on (magic links use this flow). Under **Authentication → URL
-Configuration**, set:
+In the Supabase dashboard: **Authentication → Providers**, confirm **Email** is enabled, and turn
+**Confirm email** OFF — the login form signs a brand-new email straight in without a
+confirmation link (see below). Password reset emails still work with this off. Under
+**Authentication → URL Configuration**, set:
 - Site URL: `http://localhost:3000` (add your Vercel URL here too once deployed, as an
   additional redirect URL: `https://your-app.vercel.app/**`)
 
@@ -61,7 +66,9 @@ Configuration**, set:
 npm run dev
 ```
 
-Visit http://localhost:3000, sign in with your email (check your inbox for the magic link).
+Visit http://localhost:3000 and enter an email and password. The same form registers you if
+that email hasn't been used before, or signs you in if it has — there's no separate sign-up step
+and no confirmation email to check.
 
 ## 7. Add your LLM keys
 
@@ -112,8 +119,10 @@ npm run test:e2e  # Playwright — requires a real Supabase project (see step 1)
 
 ## Troubleshooting
 
-- **Magic link redirects to an error page** — check the Supabase Site URL / Redirect URLs match
-  exactly (including trailing `/**`).
+- **Reset-password links redirect to an error page** — check the Supabase Site URL / Redirect
+  URLs match exactly (including trailing `/**`).
+- **Signing up doesn't log you in / lands you back on `/login`** — check that **Confirm email**
+  is OFF in Authentication → Providers → Email; with it on, `signUp()` won't return a session.
 - **`db:push` fails with a permissions error** — make sure `DATABASE_URL` uses the pooler
   connection string with your actual password substituted in, not the placeholder.
 - **LLM calls always fail** — open Settings → LLM Providers → the health panel shows the exact

@@ -22,3 +22,18 @@ export async function listDebtsWithBalance(userId: string) {
     };
   });
 }
+
+/** Outstanding totals across all unsettled debts, for the dashboard summary. */
+export async function getDebtSummary(userId: string) {
+  const debtsWithBalance = await listDebtsWithBalance(userId);
+  const active = debtsWithBalance.filter((d) => !d.isSettled);
+
+  const totalOwedToMe = active
+    .filter((d) => d.direction === "owed_to_me")
+    .reduce((sum, d) => sum + d.balance, 0);
+  const totalIOwe = active
+    .filter((d) => d.direction === "i_owe")
+    .reduce((sum, d) => sum + d.balance, 0);
+
+  return { totalOwedToMe, totalIOwe };
+}

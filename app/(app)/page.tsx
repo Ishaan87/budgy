@@ -4,6 +4,7 @@ import {
   getMonthSummary,
   getTopMerchants,
 } from "@/lib/db/queries/dashboard";
+import { getDebtSummary } from "@/lib/db/queries/debts";
 import { projectMonthEnd } from "@/lib/dashboard/projections";
 import { requireUserId } from "@/lib/supabase/server";
 import { SummaryTiles } from "@/components/dashboard/summary-tiles";
@@ -16,11 +17,12 @@ export default async function DashboardPage() {
   const userId = await requireUserId();
   const now = new Date();
 
-  const [summary, trend, categories, merchants] = await Promise.all([
+  const [summary, trend, categories, merchants, debtSummary] = await Promise.all([
     getMonthSummary(userId, now),
     getDailyExpenseTrend(userId, now),
     getCategoryBreakdown(userId, now),
     getTopMerchants(userId, now),
+    getDebtSummary(userId),
   ]);
 
   const { projected } = projectMonthEnd(summary.totalExpense, now);
@@ -40,6 +42,8 @@ export default async function DashboardPage() {
         net={summary.net}
         cashOnHand={summary.cashOnHand}
         projected={projected}
+        totalOwedToMe={debtSummary.totalOwedToMe}
+        totalIOwe={debtSummary.totalIOwe}
       />
 
       <div className="grid gap-4 lg:grid-cols-2">
