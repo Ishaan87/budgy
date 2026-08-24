@@ -49,6 +49,38 @@ function filterClause(filter: QuerySpec["filters"][number]): SQL {
 
 export type AnalyticsRow = { label: string | null; value: number };
 
+export type AnalyticsFacets = {
+  categoryNames: string[];
+  accountNames: string[];
+  merchants: string[];
+};
+
+/** Distinct values for the free-text fields, so the query-spec LLM can pick exact matches instead of guessing. */
+export async function getAnalyticsFacets(userId: string): Promise<AnalyticsFacets> {
+  const rows = await db.execute<{ category_name: string | null; account_name: string | null; merchant: string | null }>(
+    sql`
+      select distinct category_name, account_name, merchant
+      from v_analytics_transactions
+      where user_id = ${userId}
+    `,
+  );
+
+  const categoryNames = new Set<string>();
+  const accountNames = new Set<string>();
+  const merchants = new Set<string>();
+  for (const r of rows) {
+    if (r.category_name) categoryNames.add(r.category_name);
+    if (r.account_name) accountNames.add(r.account_name);
+    if (r.merchant) merchants.add(r.merchant);
+  }
+
+  return {
+    categoryNames: [...categoryNames].sort(),
+    accountNames: [...accountNames].sort(),
+    merchants: [...merchants].slice(0, 50),
+  };
+}
+
 /** Compiles a validated QuerySpec into a parameterized query and runs it, scoped to userId. */
 export async function runAnalyticsQuery(userId: string, spec: QuerySpec): Promise<AnalyticsRow[]> {
   const conditions: SQL[] = [sql`user_id = ${userId}`];

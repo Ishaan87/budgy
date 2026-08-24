@@ -3,7 +3,7 @@ import { z } from "zod";
 import { requireUserId } from "@/lib/supabase/server";
 import { AllProvidersExhausted, complete } from "@/lib/llm/router";
 import { querySpecSchema } from "@/lib/analytics/querySpec";
-import { runAnalyticsQuery } from "@/lib/analytics/compile";
+import { getAnalyticsFacets, runAnalyticsQuery } from "@/lib/analytics/compile";
 import {
   buildAnswerSystemPrompt,
   buildAnswerUserPrompt,
@@ -21,12 +21,14 @@ export async function POST(request: Request) {
   const todayIso = new Date().toISOString().slice(0, 10);
 
   try {
+    const facets = await getAnalyticsFacets(userId);
+
     const { data: spec } = await complete({
       userId,
       purpose: "nl_analytics_query",
       schema: querySpecSchema,
       schemaName: "analytics_query_spec",
-      system: buildQuerySpecSystemPrompt({ todayIso }),
+      system: buildQuerySpecSystemPrompt({ todayIso, facets }),
       user: buildQuerySpecUserPrompt(question),
     });
 

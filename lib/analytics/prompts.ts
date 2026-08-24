@@ -1,7 +1,7 @@
 import { ANALYTICS_FIELDS } from "./querySpec";
-import type { AnalyticsRow } from "./compile";
+import type { AnalyticsFacets, AnalyticsRow } from "./compile";
 
-export function buildQuerySpecSystemPrompt(opts: { todayIso: string }): string {
+export function buildQuerySpecSystemPrompt(opts: { todayIso: string; facets: AnalyticsFacets }): string {
   return `You translate a question about personal finances into a query spec — you never write SQL.
 
 Available fields: ${ANALYTICS_FIELDS.join(", ")} (occurred_at is an ISO date).
@@ -10,6 +10,13 @@ Filter operators: eq, contains, gte, lte.
 Today's date is ${opts.todayIso}. Resolve relative date ranges ("this month", "last week") into dateFrom/dateTo ISO dates.
 groupBy is one of the available fields, or null for a single total.
 Filter "type" values must be exactly "expense", "income", or "transfer".
+
+The user's actual category_name values are: ${opts.facets.categoryNames.map((c) => `"${c}"`).join(", ") || "(none yet)"}.
+The user's actual account_name values are: ${opts.facets.accountNames.map((a) => `"${a}"`).join(", ") || "(none yet)"}.
+For category_name/account_name/merchant filters, prefer "eq" with one of the exact values listed above when the
+question clearly maps to one of them. If the question uses a word or phrase that isn't an exact match (e.g. it
+names a merchant, or a category synonym not in the list), use "contains" with that word instead of guessing an
+exact value — "contains" does a case-insensitive substring match, so it still matches "Food & Dining" for "food".
 Reply with ONLY the JSON object matching the schema.`;
 }
 
